@@ -1,23 +1,26 @@
-#!/usr/bin/env bash
-# Write a Bash script that displays:
-# numbers from 1 to 100.
-# Displays FizzBuzz when the number is a multiple of 3 and 5
-# Displays Fizz when the number is multiple of 3
-# Displays Buzz when the number is a multiple of 5
+#!/usr/bin/python3
+"""Defines an island perimeter measuring function."""
 
-for (( i=1; i<=100; i++))
-do
-    if (( i % 3 == 0 && i % 5 == 0))
-    then
-	echo "FizzBuzz"
-    elif (( i % 3 == 0 ))
-    then
-	echo "Fizz"
-    elif (( i % 5 == 0))
-    then
-       	echo "Buzz"
-    else
-	echo "$i"
-    fi
-done
 
+def island_perimeter(grid):
+    """Return the perimiter of an island.
+    The grid represents water by 0 and land by 1.
+    Args:
+        grid (list): A list of list of integers representing an island.
+    Returns:
+        The perimeter of the island defined in grid.
+    """
+    width = len(grid[0])
+    height = len(grid)
+    edges = 0
+    size = 0
+
+    for i in range(height):
+        for j in range(width):
+            if grid[i][j] == 1:
+                size += 1
+                if (j > 0 and grid[i][j - 1] == 1):
+                    edges += 1
+                if (i > 0 and grid[i - 1][j] == 1):
+                    edges += 1
+    return size * 4 - edges * 2
